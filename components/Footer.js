@@ -34,14 +34,14 @@ export default function Footer() {
           <div className="flex items-center space-x-4 text-sm mt-3">
             <span className="flex items-center space-x-2">
               <FaEnvelope className="text-purple-400" />
-              <a href="mailto:hello@rehobothhub.com" className="hover:text-purple-400 transition">
-                hello@rehobothhub.com
+              <a href="mailto:udytite4319@gmail.com " className="hover:text-purple-400 transition">
+                udytite4319@gmail.com 
               </a>
             </span>
             <span className="hidden md:flex items-center space-x-2">
               <FaPhoneAlt className="text-purple-400" />
               <a href="tel:+2348000000000" className="hover:text-purple-400 transition">
-                +234 800 000 0000
+                +2349071691172
               </a>
             </span>
           </div>
