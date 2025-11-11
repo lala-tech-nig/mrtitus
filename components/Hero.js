@@ -1,47 +1,97 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FaCamera, FaLaptopCode, FaChalkboardTeacher, FaHome } from 'react-icons/fa'
 
+export default function Hero() {
+  const slides = [
+    'I empower minds through education and mentorship.',
+    'Photography & videography that tells your story.',
+    'Digital strategies that amplify your brand.',
+    'Helping you find homes and opportunities as a trusted realtor.'
+  ]
+  const [index, setIndex] = useState(0)
 
-export default function Hero(){
-const slides = [
-'I build beautiful websites that convert.',
-'Photography that tells your story.',
-'Branding that people remember.'
-]
-const [index, setIndex] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setIndex(i => (i + 1) % slides.length), 3500)
+    return () => clearInterval(id)
+  }, [])
 
+  const services = [
+    { icon: <FaChalkboardTeacher className="w-6 h-6 text-purple-700" />, title: 'Education & Mentorship', desc: 'Guiding individuals to reach their highest potential.' },
+    { icon: <FaCamera className="w-6 h-6 text-purple-700" />, title: 'Photography & Videography', desc: 'Capturing moments that tell compelling stories.' },
+    { icon: <FaLaptopCode className="w-6 h-6 text-purple-700" />, title: 'Digital Marketing', desc: 'Boosting brands with smart online strategies.' },
+    { icon: <FaHome className="w-6 h-6 text-purple-700" />, title: 'Realtor Services', desc: 'Connecting people to their dream homes seamlessly.' }
+  ]
 
-useEffect(()=>{
-const id = setInterval(()=> setIndex(i => (i+1) % slides.length), 3500)
-return ()=> clearInterval(id)
-},[])
+  const scrollToContact = () => {
+    const contact = document.getElementById('contact')
+    if (contact) contact.scrollIntoView({ behavior: 'smooth' })
+  }
 
+  return (
+    <section className="bg-white">
+      <div className="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center">
+        {/* Text Column */}
+        <div className="flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.7 }}
+              className="text-4xl md:text-5xl font-extrabold leading-tight text-purple-700"
+            >
+              {slides[index]}
+            </motion.h1>
+          </AnimatePresence>
 
-return (
-<section className="bg-white">
-<div className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-8 items-center">
-<div className="order-2 md:order-1">
-<div className="overflow-hidden">
-<div className="h-40 md:h-56 flex items-center">
-{/* sliding text */}
-<div className="text-3xl md:text-5xl font-extrabold leading-tight">
-<span className="block">{slides[index]}</span>
-</div>
-</div>
-</div>
+          <p className="mt-6 text-lg text-gray-700 leading-relaxed">
+            Crafting meaningful experiences, capturing memories, and empowering your growth through education, digital innovation, and real estate.
+          </p>
 
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={scrollToContact}
+            className="mt-8 bg-purple-700 hover:bg-black text-white font-semibold py-3 px-8 rounded-full shadow-md transition-all duration-300 w-max"
+          >
+            Work with Me Now
+          </motion.button>
 
-<p className="mt-6 text-lg leading-relaxed">Crafting digital experiences and moments — let's make something memorable together.</p>
-<a href="/#contact" className="inline-block mt-6 bg-brand text-white font-semibold py-3 px-6 rounded-lg">Work with me now</a>
-</div>
+          {/* Services Preview */}
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {services.map((s, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-start gap-4 p-4 rounded-lg bg-purple-50 hover:bg-purple-100 transition-all duration-300 cursor-pointer"
+              >
+                <div className="flex-shrink-0">{s.icon}</div>
+                <div>
+                  <h3 className="font-bold text-lg text-gray-900">{s.title}</h3>
+                  <p className="text-gray-700 text-sm mt-1">{s.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-
-<div className="order-1 md:order-2 flex justify-center md:justify-end">
-<div className="w-[320px] md:w-[460px] lg:w-[560px] rounded-lg overflow-hidden shadow-2xl">
-<img src="/profile.png" alt="portrait" className="object-cover w-full h-full" />
-</div>
-</div>
-</div>
-</section>
-)
+        {/* Image Column */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+          className="flex justify-center md:justify-end"
+        >
+          <img
+            src="/profile.png"
+            alt="Uduakobong Titus portrait"
+            className="w-[320px] md:w-[460px] lg:w-[560px] h-auto object-cover rounded-2xl"
+          />
+        </motion.div>
+      </div>
+    </section>
+  )
 }
