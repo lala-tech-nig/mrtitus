@@ -102,19 +102,6 @@ export default function Home() {
         id="contact"
         className="max-w-4xl mx-auto px-6 py-24 text-center bg-gradient-to-b from-purple-50 to-white"
       >
-        <motion.h2
-          className="text-4xl font-bold mb-6 text-purple-700"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          Let’s Connect
-        </motion.h2>
-        <p className="text-gray-700 mb-10 text-lg">
-          Have a project, collaboration idea, or training request?  
-          I’d love to hear from you.
-        </p>
         <ContactForm />
       </section>
     </div>
